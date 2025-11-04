@@ -2,8 +2,10 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useLanguageStore } from '@/lib/store';
 
 export default function ParallaxSection() {
+  const { t } = useLanguageStore();
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -60,15 +62,14 @@ export default function ParallaxSection() {
           className="space-y-6 sm:space-y-8"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-            <span className="block mb-2 sm:mb-3">Advanced Skincare</span>
+            <span className="block mb-2 sm:mb-3">{t('advancedSkincare')}</span>
             <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Targeted Solutions
+              {t('targetedSolutions')}
             </span>
           </h2>
 
           <p className="text-lg sm:text-xl md:text-2xl text-neutral-200 max-w-3xl mx-auto leading-relaxed">
-            Experience the future of dermatology with our cutting-edge treatments
-            designed for your unique skin needs
+            {t('parallaxDesc')}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 sm:pt-6">
@@ -77,14 +78,14 @@ export default function ParallaxSection() {
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full text-base sm:text-lg font-semibold shadow-2xl hover:shadow-purple-500/50 transition-shadow w-full sm:w-auto"
             >
-              Book Consultation
+              {t('bookConsultation')}
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-full text-base sm:text-lg font-semibold border-2 border-white/20 hover:bg-white/20 transition-colors w-full sm:w-auto"
             >
-              Learn More
+              {t('learnMore')}
             </motion.button>
           </div>
         </motion.div>
@@ -98,9 +99,9 @@ export default function ParallaxSection() {
           className="grid grid-cols-3 gap-4 sm:gap-8 mt-12 sm:mt-20"
         >
           {[
-            { value: '15K+', label: 'Patients' },
-            { value: '98%', label: 'Satisfaction' },
-            { value: '25+', label: 'Treatments' },
+            { value: '15K+', labelKey: 'patients' as const },
+            { value: '98%', labelKey: 'satisfaction' as const },
+            { value: '25+', labelKey: 'treatmentsCount' as const },
           ].map((stat, index) => (
             <motion.div
               key={index}
@@ -114,7 +115,7 @@ export default function ParallaxSection() {
                 {stat.value}
               </div>
               <div className="text-xs sm:text-sm md:text-base text-neutral-300">
-                {stat.label}
+                {t(stat.labelKey)}
               </div>
             </motion.div>
           ))}

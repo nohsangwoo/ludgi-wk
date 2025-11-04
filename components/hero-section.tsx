@@ -2,9 +2,11 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { SplitText, GradientText } from './animated-text';
+import { SplitText } from './animated-text';
+import { useLanguageStore } from '@/lib/store';
 
 export default function HeroSection() {
+  const { t } = useLanguageStore();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Animated Background Elements */}
@@ -55,17 +57,17 @@ export default function HeroSection() {
             </motion.div>
 
             <SplitText
-              text="Transform Your Skin"
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6"
+              text={t('heroTitle')}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6 dark:text-white"
             />
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.6 }}
-              className="text-base sm:text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto leading-relaxed"
+              className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto leading-relaxed"
             >
-              Advanced dermatology & aesthetic treatments
+              {t('heroSubtitle')}
             </motion.div>
           </div>
 
@@ -81,14 +83,14 @@ export default function HeroSection() {
               whileTap={{ scale: 0.95 }}
               className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full text-base sm:text-lg font-semibold shadow-xl transition-all"
             >
-              Schedule Consultation
+              {t('scheduleConsultation')}
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-white text-neutral-800 rounded-full text-base sm:text-lg font-semibold border-2 border-neutral-200 hover:border-neutral-300 transition-all shadow-lg"
+              className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-white dark:bg-neutral-800 text-neutral-800 dark:text-white rounded-full text-base sm:text-lg font-semibold border-2 border-neutral-200 dark:border-neutral-700 hover:border-neutral-300 dark:hover:border-neutral-600 transition-all shadow-lg"
             >
-              Explore Treatments
+              {t('exploreTreatments')}
             </motion.button>
           </motion.div>
 
@@ -102,18 +104,18 @@ export default function HeroSection() {
             {[
               {
                 icon: '🔬',
-                title: 'Advanced Technology',
-                description: 'State-of-the-art equipment for precise results',
+                titleKey: 'advancedTechnology' as const,
+                descKey: 'advancedTechnologyDesc' as const,
               },
               {
                 icon: '👨‍⚕️',
-                title: 'Expert Specialists',
-                description: 'Board-certified dermatologists with years of experience',
+                titleKey: 'expertSpecialists' as const,
+                descKey: 'expertSpecialistsDesc' as const,
               },
               {
                 icon: '✨',
-                title: 'Personalized Plans',
-                description: 'Custom treatment plans designed for your skin type',
+                titleKey: 'personalizedPlans' as const,
+                descKey: 'personalizedPlansDesc' as const,
               },
             ].map((feature, index) => (
               <motion.div
@@ -122,14 +124,14 @@ export default function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.8 + index * 0.2, duration: 0.6 }}
                 whileHover={{ y: -5, scale: 1.02 }}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-neutral-200 shadow-lg hover:shadow-xl transition-all"
+                className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-neutral-200 dark:border-neutral-700 shadow-lg hover:shadow-xl transition-all"
               >
                 <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">{feature.icon}</div>
-                <h3 className="text-lg sm:text-xl font-bold mb-2 text-neutral-800">
-                  {feature.title}
+                <h3 className="text-lg sm:text-xl font-bold mb-2 text-neutral-800 dark:text-white">
+                  {t(feature.titleKey)}
                 </h3>
-                <p className="text-sm sm:text-base text-neutral-600">
-                  {feature.description}
+                <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-300">
+                  {t(feature.descKey)}
                 </p>
               </motion.div>
             ))}

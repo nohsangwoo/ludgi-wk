@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useLanguageStore } from '@/lib/store';
 
 const videos = [
   'grok-video-09a48336-332e-4690-a910-70cd8d259780.mp4',
@@ -51,6 +52,7 @@ const shuffleArray = (array: string[]) => {
 };
 
 export default function VideoCarousel() {
+  const { t } = useLanguageStore();
   const [shuffledVideos, setShuffledVideos] = useState<string[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -62,7 +64,7 @@ export default function VideoCarousel() {
   const displayVideos = [...shuffledVideos, ...shuffledVideos];
 
   return (
-    <section className="py-12 sm:py-16 bg-gradient-to-b from-white to-neutral-50 overflow-hidden">
+    <section className="py-12 sm:py-16 bg-gradient-to-b from-white dark:from-neutral-900 to-neutral-50 dark:to-neutral-800 overflow-hidden">
       <div className="mb-8 sm:mb-12 text-center px-4">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -70,16 +72,16 @@ export default function VideoCarousel() {
           viewport={{ once: true }}
           className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
         >
-          Real Results, Real Transformations
+          {t('realResults')}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="text-neutral-600 text-base sm:text-lg max-w-2xl mx-auto"
+          className="text-neutral-600 dark:text-neutral-300 text-base sm:text-lg max-w-2xl mx-auto"
         >
-          See the amazing results our patients have achieved
+          {t('realResultsDesc')}
         </motion.p>
       </div>
 

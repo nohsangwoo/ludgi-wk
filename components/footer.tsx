@@ -2,10 +2,12 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useLanguageStore } from '@/lib/store';
 
 export default function Footer() {
+  const { t } = useLanguageStore();
   return (
-    <footer className="bg-gradient-to-br from-neutral-900 to-neutral-800 text-white">
+    <footer className="bg-gradient-to-br from-neutral-900 to-neutral-800 dark:from-black dark:to-neutral-900 text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-8 sm:mb-12">
           {/* Brand */}
@@ -16,25 +18,30 @@ export default function Footer() {
                 alt="Ludgik Logo"
                 width={120}
                 height={40}
-                className=" h-8 sm:h-10 w-auto rounded-2xl"
+                className="h-8 sm:h-10 w-auto rounded-2xl brightness-0 invert"
               />
             </div>
             <p className="text-sm sm:text-base text-neutral-400 leading-relaxed">
-              Advanced dermatology and aesthetic treatments for your skin.
+              {t('footerDesc')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-base sm:text-lg font-bold mb-4">Quick Links</h3>
+            <h3 className="text-base sm:text-lg font-bold mb-4">{t('quickLinks')}</h3>
             <ul className="space-y-2 sm:space-y-3">
-              {['Services', 'Treatments', 'About Us', 'Contact'].map((link) => (
-                <li key={link}>
+              {[
+                { key: 'services', href: '#services' },
+                { key: 'treatments', href: '#treatments' },
+                { key: 'about', href: '#about' },
+                { key: 'contactUs', href: '#contact' },
+              ].map((link) => (
+                <li key={link.key}>
                   <a
-                    href={`#${link.toLowerCase().replace(' ', '-')}`}
+                    href={link.href}
                     className="text-sm sm:text-base text-neutral-400 hover:text-white transition-colors"
                   >
-                    {link}
+                    {t(link.key as any)}
                   </a>
                 </li>
               ))}
@@ -43,16 +50,16 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-base sm:text-lg font-bold mb-4">Popular Services</h3>
+            <h3 className="text-base sm:text-lg font-bold mb-4">{t('popularServices')}</h3>
             <ul className="space-y-2 sm:space-y-3">
-              {['Laser Treatment', 'Anti-Aging', 'Skin Rejuvenation', 'Acne Treatment'].map(
+              {['laserTreatments', 'antiAging', 'skinRejuvenation', 'acneTreatment'].map(
                 (service) => (
                   <li key={service}>
                     <a
                       href="#services"
                       className="text-sm sm:text-base text-neutral-400 hover:text-white transition-colors"
                     >
-                      {service}
+                      {t(service as any)}
                     </a>
                   </li>
                 )
@@ -62,7 +69,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-base sm:text-lg font-bold mb-4">Contact Us</h3>
+            <h3 className="text-base sm:text-lg font-bold mb-4">{t('contactUs')}</h3>
             <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base text-neutral-400">
               <li>📍 Seoul, South Korea</li>
               <li>📞 +82 2-1234-5678</li>
@@ -88,17 +95,17 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 sm:pt-8 border-t border-neutral-700">
+        <div className="pt-6 sm:pt-8 border-t border-neutral-700 dark:border-neutral-800">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-xs sm:text-sm text-neutral-400 text-center sm:text-left">
-              © 2025 Ludgik. All rights reserved.
+              © 2025 Ludgik. {t('allRightsReserved')}.
             </p>
             <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm text-neutral-400">
               <a href="#privacy" className="hover:text-white transition-colors">
-                Privacy Policy
+                {t('privacyPolicy')}
               </a>
               <a href="#terms" className="hover:text-white transition-colors">
-                Terms of Service
+                {t('termsOfService')}
               </a>
             </div>
           </div>
