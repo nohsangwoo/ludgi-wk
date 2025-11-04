@@ -4,18 +4,21 @@ import VideoCarousel from '@/components/video-carousel';
 import ServicesSection from '@/components/services-section';
 import ParallaxSection from '@/components/parallax-section';
 import Footer from '@/components/footer';
+import { Providers } from '@/components/providers';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <main>
-        <HeroSection />
-        <VideoCarousel />
-        <ServicesSection />
-        <ParallaxSection />
-      </main>
-      <Footer />
-    </div>
+    <Providers>
+      <div className="min-h-screen bg-white dark:bg-neutral-900">
+        <Header />
+        <main>
+          <HeroSection />
+          <VideoCarousel />
+          <ServicesSection />
+          <ParallaxSection />
+        </main>
+        <Footer />
+      </div>
+    </Providers>
   );
 }

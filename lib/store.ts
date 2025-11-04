@@ -26,6 +26,7 @@ export const useLanguageStore = create<LanguageStore>()(
     }),
     {
       name: 'language-storage',
+      skipHydration: true,
     }
   )
 );

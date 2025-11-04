@@ -11,20 +11,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useEffect } from 'react';
 
 export default function Header() {
   const { language, setLanguage, t } = useLanguageStore();
-  const { theme, toggleTheme, setTheme } = useThemeStore();
-
-  useEffect(() => {
-    // Initialize theme on mount
-    const savedTheme = localStorage.getItem('theme-storage');
-    if (savedTheme) {
-      const { state } = JSON.parse(savedTheme);
-      setTheme(state.theme);
-    }
-  }, [setTheme]);
+  const { toggleTheme } = useThemeStore();
 
   return (
     <motion.header
